@@ -1,0 +1,109 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ArrowRight, Code2, Sparkles, CheckCircle } from "lucide-react";
+import { motion } from "framer-motion";
+
+export default function HeroSection() {
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.4'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3Ccircle cx='37' cy='37' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }} />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="text-center">
+          {/* Status Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-8"
+          >
+            <Badge className="bg-gold-light text-gold border-gold px-4 py-2 text-sm font-medium">
+              <CheckCircle className="w-4 h-4 mr-2" />
+              Available for New Projects
+            </Badge>
+          </motion.div>
+
+          {/* Main Headline */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="mb-8"
+          >
+            <h1 className="text-5xl md:text-7xl font-bold text-black mb-6 leading-tight">
+              Full-Stack Developer
+              <span className="block text-gold text-shadow">
+                Extraordinary Results
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              I craft premium web applications that combine elegant design with 
+              powerful functionality. From concept to deployment, I deliver solutions 
+              that drive your business forward.
+            </p>
+          </motion.div>
+
+          {/* Key Features */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="flex flex-wrap justify-center gap-6 mb-12"
+          >
+            {[
+              "React & Next.js Expert",
+              "Node.js & Python Backend",
+              "Cloud Architecture",
+              "API Integration Specialist"
+            ].map((skill) => (
+              <div key={skill} className="flex items-center gap-2 text-gray-700">
+                <Sparkles className="w-4 h-4 text-gold" />
+                <span className="font-medium">{skill}</span>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <Link to={createPageUrl("Contact")}>
+              <Button size="lg" className="bg-gold hover:bg-gold-dark text-white shadow-lg px-8 py-4 text-lg">
+                Start Your Project
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </Link>
+            <Link to={createPageUrl("Portfolio")}>
+              <Button size="lg" variant="outline" className="border-gold text-gold hover:bg-gold hover:text-white px-8 py-4 text-lg">
+                View My Work
+              </Button>
+            </Link>
+          </motion.div>
+
+          {/* Scroll Indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1 }}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          >
+            <div className="w-6 h-10 border-2 border-gold rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-gold rounded-full mt-2 animate-bounce" />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
