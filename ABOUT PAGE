@@ -1,0 +1,131 @@
+
+import React from "react";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight, Lightbulb, Zap, Shield } from "lucide-react";
+import { motion } from "framer-motion";
+
+export default function About() {
+  const values = [
+    { icon: Zap, title: "Quality & Excellence", description: "Delivering high-quality, robust, and scalable solutions is my top priority." },
+    { icon: Lightbulb, title: "Continuous Learning", description: "I am constantly exploring new technologies to stay at the forefront of development." },
+    { icon: Shield, title: "Integrity & Transparency", description: "Building trust through open communication and honest collaboration." }
+  ];
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Bio Section */}
+      <section className="pt-32 pb-20 bg-light-gray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <span className="text-gold font-semibold">ABOUT ME</span>
+              <h1 className="text-4xl md:text-5xl font-bold text-black mt-4 mb-6 leading-tight">
+                Crafting Digital Experiences That Matter
+              </h1>
+              <p className="text-lg text-gray-600 leading-relaxed mb-4">
+                Hello, I'm Gabriel Akujobi, a dedicated full-stack developer with a passion for turning complex problems into elegant, user-friendly digital solutions. My journey in technology began with a curiosity for how things work, and it has evolved into a career dedicated to building high-quality software.
+              </p>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                From architecting robust back-end systems to designing responsive front-end interfaces, I thrive on the challenges of end-to-end development. My goal is to not only write clean and efficient code but also to build applications that provide real value and create a lasting positive impact for users and businesses.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+              className="flex justify-center"
+            >
+              <img
+                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68cec3b5f1fe9e59f16598f5/c9e5669c5_IMG_8871.jpg"
+                alt="Gabriel Akujobi"
+                className="rounded-full w-80 h-80 object-cover shadow-2xl border-8 border-white"
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Values Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-black mb-4">My Mission & Values</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              My professional philosophy is guided by a clear mission and a set of core values that influence every project I undertake.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 items-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Card className="border-gold shadow-lg p-8 h-full">
+                <h3 className="text-3xl font-bold text-center text-black mb-4">Mission Statement</h3>
+                <p className="text-center text-lg text-gray-700 leading-relaxed">
+                  "To leverage cutting-edge technology and creative problem-solving to build exceptional digital products that empower businesses, delight users, and drive meaningful innovation."
+                </p>
+              </Card>
+            </motion.div>
+            <div className="space-y-6">
+              {values.map((value, index) => (
+                <motion.div
+                  key={value.title}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 bg-gold-light rounded-lg flex items-center justify-center">
+                      <value.icon className="w-6 h-6 text-gold" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold text-black">{value.title}</h4>
+                      <p className="text-gray-600">{value.description}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* CTA Section */}
+      <section className="py-20 gradient-gold">
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 text-white">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-4xl font-bold mb-6">Let's Connect</h2>
+            <p className="text-xl mb-8 max-w-2xl mx-auto">
+              Have a project in mind or just want to discuss technology? I'd love to hear from you.
+            </p>
+            <div className="space-y-4 sm:space-y-0 sm:flex sm:gap-6 justify-center text-lg">
+                <p><strong>Email:</strong> GabrielAkujobi@outlook.com</p>
+                <p><strong>Phone:</strong> +234-7083539924</p>
+            </div>
+            <div className="mt-8">
+                <Link to={createPageUrl("Contact")}>
+                    <Button size="lg" className="bg-white text-black hover:bg-gray-100 shadow-lg">
+                        Get in Touch
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                    </Button>
+                </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+}
