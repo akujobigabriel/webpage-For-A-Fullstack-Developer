@@ -1,0 +1,305 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { 
+  Code2, 
+  Database, 
+  Globe, 
+  Server, 
+  Smartphone,
+  Cloud,
+  Zap,
+  Shield,
+  ArrowRight,
+  CheckCircle
+} from "lucide-react";
+import { motion } from "framer-motion";
+
+const services = [
+  {
+    icon: Code2,
+    title: "Frontend Development",
+    description: "Create stunning, responsive user interfaces that captivate your audience and drive conversions.",
+    features: [
+      "React & Next.js Development",
+      "TypeScript Implementation", 
+      "Responsive Design (Mobile-First)",
+      "Modern CSS & Tailwind",
+      "Performance Optimization",
+      "SEO Best Practices"
+    ],
+    pricing: "Starting at $2,500",
+    timeline: "2-4 weeks"
+  },
+  {
+    icon: Server,
+    title: "Backend Development",
+    description: "Build robust, scalable server-side solutions that power your applications reliably.",
+    features: [
+      "RESTful API Development",
+      "GraphQL Implementation",
+      "Database Design & Optimization",
+      "Authentication & Security",
+      "Third-party Integrations",
+      "Performance Monitoring"
+    ],
+    pricing: "Starting at $3,000",
+    timeline: "3-5 weeks"
+  },
+  {
+    icon: Globe,
+    title: "Full-Stack Applications",
+    description: "Complete web applications from concept to deployment, handling every technical detail.",
+    features: [
+      "End-to-End Development",
+      "Custom Business Logic",
+      "Real-time Features",
+      "Admin Dashboards",
+      "User Management Systems",
+      "Analytics Integration"
+    ],
+    pricing: "Starting at $5,000",
+    timeline: "6-10 weeks"
+  },
+  {
+    icon: Database,
+    title: "Database Solutions",
+    description: "Design and implement efficient data storage solutions optimized for your specific needs.",
+    features: [
+      "Database Architecture",
+      "SQL & NoSQL Optimization",
+      "Data Migration Services",
+      "Backup & Recovery Systems",
+      "Performance Tuning",
+      "Security Implementation"
+    ],
+    pricing: "Starting at $1,500",
+    timeline: "1-3 weeks"
+  },
+  {
+    icon: Cloud,
+    title: "Cloud Deployment",
+    description: "Deploy your applications on modern cloud infrastructure with automatic scaling and monitoring.",
+    features: [
+      "AWS/GCP/Azure Deployment",
+      "CI/CD Pipeline Setup",
+      "Docker Containerization",
+      "Auto-scaling Configuration",
+      "Monitoring & Alerting",
+      "SSL & Security Setup"
+    ],
+    pricing: "Starting at $1,000",
+    timeline: "1-2 weeks"
+  },
+  {
+    icon: Smartphone,
+    title: "Mobile Development",
+    description: "Native-quality mobile applications using React Native and modern development practices.",
+    features: [
+      "React Native Development",
+      "iOS & Android Apps",
+      "Native Module Integration",
+      "Push Notifications",
+      "App Store Deployment",
+      "Performance Optimization"
+    ],
+    pricing: "Starting at $4,000",
+    timeline: "4-8 weeks"
+  }
+];
+
+const processSteps = [
+  {
+    step: "01",
+    title: "Discovery & Planning",
+    description: "We start with understanding your business goals, technical requirements, and user needs."
+  },
+  {
+    step: "02", 
+    title: "Design & Architecture",
+    description: "Create detailed wireframes, system architecture, and technology stack decisions."
+  },
+  {
+    step: "03",
+    title: "Development & Testing",
+    description: "Build your application with regular updates, code reviews, and comprehensive testing."
+  },
+  {
+    step: "04",
+    title: "Deployment & Support",
+    description: "Launch your application with proper monitoring and provide ongoing maintenance."
+  }
+];
+
+export default function Services() {
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="pt-20 pb-16 bg-gradient-to-b from-light-gray to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h1 className="text-5xl md:text-6xl font-bold text-black mb-6">
+              Premium Development
+              <span className="block text-gold">Services</span>
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Transform your vision into powerful digital solutions with comprehensive 
+              full-stack development services tailored to your business needs.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Services Grid */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            {services.map((service, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 shadow-md">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="w-14 h-14 bg-gold-light rounded-xl flex items-center justify-center">
+                          <service.icon className="w-7 h-7 text-gold" />
+                        </div>
+                        <div>
+                          <CardTitle className="text-2xl text-black mb-2">
+                            {service.title}
+                          </CardTitle>
+                          <div className="flex gap-3 text-sm">
+                            <Badge className="bg-gold text-white">
+                              {service.pricing}
+                            </Badge>
+                            <Badge variant="outline">
+                              {service.timeline}
+                            </Badge>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  
+                  <CardContent>
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      {service.description}
+                    </p>
+
+                    <div className="space-y-3">
+                      {service.features.map((feature, featureIndex) => (
+                        <div key={featureIndex} className="flex items-center gap-3">
+                          <CheckCircle className="w-5 h-5 text-gold flex-shrink-0" />
+                          <span className="text-gray-700">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-8 pt-6 border-t border-gray-100">
+                      <Link to={createPageUrl("Contact")}>
+                        <Button className="w-full bg-gold hover:bg-gold-dark text-white">
+                          Get Started
+                          <ArrowRight className="w-4 h-4 ml-2" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section className="py-20 bg-light-gray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+              My Development Process
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              A proven methodology that ensures quality results and transparent 
+              communication throughout your project.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {processSteps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <Card className="text-center h-full border-0 shadow-md">
+                  <CardContent className="p-8">
+                    <div className="w-16 h-16 bg-gold text-white rounded-full flex items-center justify-center text-xl font-bold mb-6 mx-auto">
+                      {step.step}
+                    </div>
+                    <h3 className="text-xl font-bold text-black mb-4">
+                      {step.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {step.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 gradient-gold">
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-white"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Ready to Start Your Project?
+            </h2>
+            <p className="text-xl mb-8 text-gold-light max-w-2xl mx-auto">
+              Let's discuss your requirements and create a solution that 
+              drives real business results.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to={createPageUrl("Contact")}>
+                <Button size="lg" className="bg-white text-black hover:bg-gray-100 shadow-lg">
+                  Get Free Consultation
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+              </Link>
+              <Link to={createPageUrl("Portfolio")}>
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
+                  View Past Work
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+}
