@@ -1,1 +1,102 @@
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { 
+  ArrowRight, 
+  Code2, 
+  Database, 
+  Globe, 
+  Server, 
+  Smartphone,
+  Zap,
+  CheckCircle,
+  Star,
+  Play,
+  MapPin
+} from "lucide-react";
+import { motion } from "framer-motion";
 
+import HeroSection from "../components/home/HeroSection";
+import ServicesPreview from "../components/home/ServicesPreview";
+import PortfolioPreview from "../components/home/PortfolioPreview";
+import TechStack from "../components/home/TechStack";
+import SiteTour from "../components/home/SiteTour";
+import Testimonials from "../components/home/Testimonials";
+
+export default function Home() {
+  const [isVisible, setIsVisible] = useState({});
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(prev => ({
+            ...prev,
+            [entry.target.id]: entry.isIntersecting
+          }));
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('[id]').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <HeroSection />
+
+      {/* Services Preview */}
+      <ServicesPreview />
+
+      {/* Portfolio Preview */}
+      <PortfolioPreview />
+
+      {/* Tech Stack & Site Tour */}
+      <TechStack />
+      
+      {/* Site Tour */}
+      <SiteTour />
+
+      {/* Testimonials */}
+      <Testimonials />
+
+      {/* CTA Section */}
+      <section className="py-20 gradient-gold">
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-white"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-shadow">
+              Ready to Build Something Amazing?
+            </h2>
+            <p className="text-xl mb-8 text-gold-light max-w-2xl mx-auto">
+              Let's transform your vision into a powerful digital solution that drives results.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to={createPageUrl("Contact")}>
+                <Button size="lg" className="bg-white text-black hover:bg-gray-100 shadow-lg">
+                  Start Your Project
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+              </Link>
+              <Link to={createPageUrl("Portfolio")}>
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
+                  View My Work
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+}
