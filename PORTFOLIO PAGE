@@ -1,0 +1,225 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { 
+  Download,
+  ArrowRight,
+  ExternalLink,
+  Github,
+  Award,
+  CheckCircle,
+  Lightbulb,
+  Users,
+  Code
+} from "lucide-react";
+import { motion } from "framer-motion";
+
+const projects = [
+  {
+    name: "AI-Powered Task Management App",
+    description: "A full-stack application that uses AI to automatically categorize and prioritize tasks. Built with a React frontend and a Python backend.",
+    technologies: ["React", "Python (FastAPI)", "PostgreSQL", "Docker", "AWS", "OpenAI API"],
+    image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=600&h=400&fit=crop",
+    liveLink: "#",
+    githubLink: "#"
+  },
+  {
+    name: "Real-Time Collaborative Whiteboard",
+    description: "A web-based whiteboard that allows multiple users to draw and collaborate in real-time using WebSockets.",
+    technologies: ["Next.js", "Node.js (Express)", "Socket.IO", "Redis", "Vercel"],
+    image: "https://images.unsplash.com/photo-1531482615713-2c657695c3b5?w=600&h=400&fit=crop",
+    liveLink: "#",
+    githubLink: "#"
+  },
+  {
+    name: "E-Commerce Analytics Dashboard",
+    description: "A comprehensive dashboard for an e-commerce platform, providing insights on sales, customer behavior, and inventory.",
+    technologies: ["TypeScript", "React", "Chart.js", "MongoDB", "Node.js"],
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+    liveLink: "#",
+    githubLink: "#"
+  }
+];
+
+const skills = {
+  technical: [
+    { category: "Frontend", items: ["React", "Next.js", "TypeScript", "JavaScript (ES6+)", "Tailwind CSS", "HTML5 & CSS3"] },
+    { category: "Backend", items: ["Node.js", "Python (FastAPI, Django)", "Express.js", "REST & GraphQL APIs"] },
+    { category: "Databases", items: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "Prisma"] },
+    { category: "Cloud & DevOps", items: ["AWS (EC2, S3, RDS)", "Docker", "Vercel", "CI/CD", "GitHub Actions"] }
+  ],
+  soft: [
+    { icon: Lightbulb, name: "Problem Solving" },
+    { icon: Users, name: "Team Collaboration" },
+    { icon: Code, name: "Clean Code Architecture" }
+  ]
+};
+
+const achievements = [
+  "Developer of the Year 2023 - TechInnovate Awards",
+  "First Place - National Hackathon for Social Good 2022",
+  "Certified AWS Solutions Architect - Associate"
+];
+
+export default function Portfolio() {
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Introduction Section */}
+      <section className="pt-20 pb-16 bg-gradient-to-b from-light-gray to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
+            <h1 className="text-5xl md:text-6xl font-bold text-black mb-6">
+              My Portfolio
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              A passionate full-stack developer with expertise in building scalable, efficient, and user-friendly web applications. Explore my work, skills, and accomplishments.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-center text-black mb-16">Featured Projects</h2>
+          <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+            {projects.map((project, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <Card className="h-full group overflow-hidden hover:shadow-xl transition-all duration-300 border-0 shadow-md">
+                  <img src={project.image} alt={project.name} className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105" />
+                  <CardContent className="p-6">
+                    <h3 className="text-2xl font-bold text-black mb-3">{project.name}</h3>
+                    <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.technologies.map(tech => <Badge key={tech} variant="outline">{tech}</Badge>)}
+                    </div>
+                    <div className="flex gap-4">
+                      <Button asChild className="flex-1 bg-gold hover:bg-gold-dark text-white">
+                        <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="w-4 h-4 mr-2" /> View Live
+                        </a>
+                      </Button>
+                      <Button asChild variant="outline" className="border-gold text-gold hover:bg-gold hover:text-white">
+                         <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                          <Github className="w-4 h-4 mr-2" /> Code
+                        </a>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="py-20 bg-light-gray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-center text-black mb-16">Technical & Soft Skills</h2>
+          <div className="grid lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 grid md:grid-cols-2 gap-8">
+              {skills.technical.map((skillCat, index) => (
+                <motion.div
+                  key={skillCat.category}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                >
+                  <Card className="h-full shadow-md border-0">
+                    <CardHeader>
+                      <CardTitle>{skillCat.category}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {skillCat.items.map(item => (
+                          <li key={item} className="flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4 text-gold" />
+                            <span className="text-gray-700">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <Card className="h-full shadow-md border-0">
+                  <CardHeader>
+                    <CardTitle>Soft Skills</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {skills.soft.map(skill => (
+                      <div key={skill.name} className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
+                        <skill.icon className="w-6 h-6 text-gold"/>
+                        <span className="font-medium text-gray-800">{skill.name}</span>
+                      </div>
+                    ))}
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Achievements & Resume Section */}
+      <section id="achievements" className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+           <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+           >
+            <h2 className="text-4xl font-bold text-black mb-8">Achievements & Recognitions</h2>
+            <ul className="space-y-4">
+              {achievements.map((achievement, index) => (
+                <li key={index} className="flex items-center gap-4 text-lg">
+                  <Award className="w-6 h-6 text-gold" />
+                  <span className="text-gray-700">{achievement}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+           >
+            <Card className="shadow-xl border-gold p-8">
+              <h3 className="text-3xl font-bold text-black mb-4">Download My Resume</h3>
+              <p className="text-gray-600 mb-8">
+                Get a comprehensive overview of my skills, experience, and qualifications.
+              </p>
+              <Button size="lg" className="bg-gold hover:bg-gold-dark text-white">
+                <Download className="w-5 h-5 mr-2" />
+                Download PDF
+              </Button>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
+    </div>
+  );
+}
