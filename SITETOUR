@@ -1,0 +1,155 @@
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Play, Code, Palette, Zap, Shield } from "lucide-react";
+import { motion } from "framer-motion";
+
+const tourSteps = [
+  {
+    icon: Palette,
+    title: "Design System",
+    description: "Custom CSS variables for the gold and white color palette, with consistent spacing and typography throughout.",
+    code: ":root { --gold: #D4AF37; --gold-light: #F4E4A6; }"
+  },
+  {
+    icon: Zap,
+    title: "Performance Optimized",
+    description: "Lazy loading, optimized images, and efficient React hooks for smooth user experience.",
+    code: "useEffect(() => { /* Intersection Observer for animations */ })"
+  },
+  {
+    icon: Code,
+    title: "Component Architecture",
+    description: "Modular React components with reusable patterns and clean separation of concerns.",
+    code: "export default function Component({ children }) { return <motion.div>... }"
+  },
+  {
+    icon: Shield,
+    title: "Responsive Design",
+    description: "Mobile-first approach with Tailwind CSS ensuring perfect display on all devices.",
+    code: "className=\"md:grid-cols-3 gap-8 hover:shadow-xl\""
+  }
+];
+
+export default function SiteTour() {
+  const [activeStep, setActiveStep] = useState(0);
+
+  return (
+    <section id="site-tour" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+            Behind the Scenes
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Take a technical tour of this website itself—a live demonstration 
+            of clean code, modern architecture, and thoughtful design decisions.
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Tour Steps */}
+          <div className="space-y-4">
+            {tourSteps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <Card 
+                  className={`cursor-pointer transition-all duration-300 ${
+                    activeStep === index 
+                      ? 'border-gold shadow-lg bg-gold-light' 
+                      : 'hover:shadow-md border-gray-200'
+                  }`}
+                  onClick={() => setActiveStep(index)}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
+                        activeStep === index ? 'bg-gold' : 'bg-gray-100'
+                      }`}>
+                        <step.icon className={`w-6 h-6 ${
+                          activeStep === index ? 'text-white' : 'text-gray-600'
+                        }`} />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-lg font-bold text-black mb-2">
+                          {step.title}
+                        </h3>
+                        <p className="text-gray-600">
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Code Preview */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="lg:sticky lg:top-8"
+          >
+            <Card className="border-gold shadow-xl">
+              <CardContent className="p-0">
+                <div className="bg-black p-4 text-white rounded-t-lg">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="flex gap-2">
+                      <div className="w-3 h-3 bg-red-500 rounded-full" />
+                      <div className="w-3 h-3 bg-yellow-500 rounded-full" />
+                      <div className="w-3 h-3 bg-green-500 rounded-full" />
+                    </div>
+                    <Badge className="bg-gold text-white">
+                      {tourSteps[activeStep].title}
+                    </Badge>
+                  </div>
+                  <code className="text-green-400 font-mono text-sm block">
+                    {tourSteps[activeStep].code}
+                  </code>
+                </div>
+                <div className="p-6">
+                  <h4 className="font-bold text-black mb-3">Implementation Details</h4>
+                  <p className="text-gray-600 leading-relaxed">
+                    {tourSteps[activeStep].description}
+                  </p>
+                  
+                  <div className="mt-6 pt-6 border-t border-gray-100">
+                    <p className="text-sm text-gray-500 mb-4">
+                      This demonstrates my approach to:
+                    </p>
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-gold rounded-full" />
+                        <span className="text-sm text-gray-700">Clean, maintainable code</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-gold rounded-full" />
+                        <span className="text-sm text-gray-700">Performance optimization</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-gold rounded-full" />
+                        <span className="text-sm text-gray-700">User experience design</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
